@@ -1,0 +1,252 @@
+{% extends "base.html" %}
+{% block title %}{{ web_title }}{% endblock %}
+{% block content %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"/>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/article.css' %}"/>
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+
+    {% load static %}
+    <link rel = "icon" href="{% static 'iyv_small.png' %}" type = "image/x-icon"/>
+</head>
+<body>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v7.0" nonce="HJcmXOiH"></script>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <div class="container all-but-footer" style="margin-left:0px; margin-right:0px; width: 100%; padding: 0px;">
+        <div class="white-row first-row row" >
+            <div class="col-md-2 col-lg-2 pink-col">
+                <!-- reserved for ads -->
+            </div>
+            <div class="col-md-8 col-lg-8 main-content">
+                <div class="heading">
+                    <h1 class="article-heading">{{ title }}</h1>
+
+
+                    <br/>
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <br/>
+                            <a href="https://wa.me/?text=IYV" class="fa fa-whatsapp vishal-social-icon"></a>
+                            <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fvishalkhopkar.wordpress.com%2F2020%2F05%2F24%2Fnepal-and-india-both-to-be-blamed%2F+NEPAL+AND+INDIA+BOTH+TO+BE+BLAMED%3F+-+It%27s+Your+View+via+%40vishal1296" data-share-title="OPOS" data-via="vishal1296" target="_blank" class="fa fa-twitter vishal-social-icon"></a>
+                            <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A8000%2Fnepal-india%23&amp;src=sdkpreparse" target="_blank" class="fa fa-facebook vishal-social-icon"></a>
+
+
+                            <!--div class="fb-share-button" data-href="http://127.0.0.1:8000/nepal-india#" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A8000%2Fnepal-india%23&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div-->
+                            <!--a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a-->
+
+                            <!--a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button"  data-via="vishal1296" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script-->
+                        </div>
+                        <div class="author-name-date col-xs-6 col-sm-6 col-md-6 col-lg-6">
+
+                                {% if post.author.profilePic %}
+                                <img src="static/img/user/{{ post.author.user_slug }}/{{ post.author.profilePicFileName }}" width="30" height="30"/>
+                                {% else %}
+                                <img src="static/img/badge.png" width="30" height="30"/>
+                                {% endif %}
+
+
+                                <h5 style="display: inline-block;"><a target="_blank" href="/user/{{ post.author.user_slug }}">{{ post.author.first_name }}</a></h5>
+                                <br/>
+                                <small>{{ post.date_time }}</small>
+                                <br/>
+                                {% if session_username == post.author.email %}
+                                    <button id="editArticle" class="article-action-btn btn btn-primary"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Edit Article</button>
+                                    <button id="deleteArticle" class="article-action-btn btn  btn-danger"><span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;Delete Article</button>
+                                {% endif %}
+
+
+                        </div>
+                    </div>
+                    <hr/>
+                </div>
+
+                <div class="content">
+                    {% autoescape off %}
+                        {{ content }}
+                    {% endautoescape %}
+
+                </div>
+                <div class="references">
+                    <h3>References:</h3>
+                    <ol class="reference-list">
+                        {% for ref in references %}
+                            <li>
+                                {% if ref.isLink %}
+                                    <a href="{{ ref.name }}" target="_blank">{{ ref.name }}</a>
+                                {% else %}
+                                    {{ ref.name }}
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ol>
+                </div>
+                <div class="tags">
+                    <h3>Tags:</h3>
+                    <p>
+                        {% for tag in tags %}
+                            <a class="tag-link" href="#">{{ tag }}</a>
+                            &nbsp;
+                        {% endfor %}
+                    </p>
+                </div>
+                <br/>
+                <hr/>
+
+                <div class="likes-comments">
+                    {% if session_username %}
+                        <button id="likeBtn" {% if session_username == post.author.email %} disabled {% endif %} class="{% if has_this_user_liked == 1 %} blue-like-dislike {% endif %} like-dislike-btn btn btn-sm btn-success"><span class="fa fa-thumbs-up"></span></button>
+                        <button id="dislikeBtn" {% if session_username == post.author.email %} disabled {% endif %} class="{% if has_this_user_liked == -1 %} blue-like-dislike {% endif %} like-dislike-btn btn btn-sm btn-danger"><span class="fa fa-thumbs-down"></span></button>
+                        <small>&nbsp;&nbsp;<a href="#likesModal" data-toggle="modal" data-target="#likesModal"> <span id="noOfLikes">{{ post.likesCnt }}</span> likes</a>, <span id="noOfDislikes">{{ post.dislikesCnt }}</span> dislikes</small>
+                        <br/>
+                        {% if session_username == post.author.email %}
+                            <h5>You cannot like or dislike your own article.</h5>
+                        {% endif %}
+                        {% if session_username != post.author.email %}
+                            <br/>
+                            <button id="reportArticle" class="btn btn-danger" data-toggle="modal" data-target="#reportModal"><span style="font-size: 20px;" class="fa fa-flag"></span>&nbsp;Flag as inappropriate</button>
+                        {% endif %}
+                        <h5>Leave a comment</h5>
+                        <textarea id="commentTextArea"  class="form-control" rows="5" style="resize:none;"></textarea>
+                        <br/>
+                        <button id="commentBtn" disabled class="btn btn-success">Post</button>
+                        <small style="text-align: right; float:right;"><span id="charCount">0</span>/500</small>
+                        <br/>
+
+                        <br/>
+                    {% else %}
+                    <small><a href="#likesModal" data-toggle="modal" data-target="#likesModal"><span id="noOfLikesForGuest">{{ post.likesCnt }}</span> likes</a>, <span id="noOfDislikesForGuest">{{ post.dislikesCnt }}</span> dislikes</small>
+                        <h4>Please <a href="javascript:void(0);" data-toggle="modal" data-target="#loginModal">login</a> to like/reply.</h4>
+                    {% endif %}
+                    <h5><span id="commentsCnt">{{ post.commentsCnt }}</span> Comments</h5>
+                    <div id="comments">
+
+                        {% for comment in comments %}
+                            <div class="comment-author" id="commentAuthor{{ comment.id }}">
+                                {% if comment.user.profilePic %}
+                                    <img src="static/img/user/{{ comment.user.user_slug }}/{{ comment.user.profilePicFileName }}" width="30" height="30"/>
+                                {% else %}
+                                    <img src="static/img/badge.png" width="30" height="30"/>
+                                {% endif %}
+                                <h4 style="display: inline-block;">&nbsp;<a href="/user/{{ comment.user.user_slug }}" target="_blank">{{ comment.user.first_name }}</a></h4>
+
+
+                                <br/>
+                            </div>
+
+                            <div id="commentText{{ comment.id }}" class="comment-text">
+                                <p>
+                                    {{ comment.comment_text }}
+                                </p>
+                                {% if comment.user.user_slug == session_user_slug %}
+                                    <h6><a onClick="editComment($(this), {{ comment.id }})" href="javascript:void(0);">Edit</a>&nbsp;&nbsp;<a onClick="deleteComment($(this), {{ comment.id }})" href="javascript:void(0);">Delete</a></h6>
+
+                                {% endif %}
+                                <hr/>
+                            </div>
+
+                        {% endfor %}
+
+
+
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-2 col-lg-2 pink-col">
+                <!-- reserved for ads -->
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="likesModal" tabindex="-1" role="dialog" aria-labelledby="likesModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <h4>Likes</h4>
+                    <div class="like-name">
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button"  class="btn btn-danger" data-dismiss="modal">Close</button>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <h4>Flag as inappropriate</h4>
+                    <div>
+
+                            <br/>
+
+                        <label>Please let us know why the article is inappropriate:</label>
+                        <div class="form-check">
+                          <input name="reasonCheckbox" class="form-check-input" type="checkbox" value="" id="hatred">
+                          <label class="form-check-label" for="hatred">
+                            Spreads hatred, or is offensive towards a community
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input name="reasonCheckbox" class="form-check-input" type="checkbox" value="" id="terror">
+                          <label class="form-check-label" for="terror">
+                            Promotes terrorism
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input name="reasonCheckbox" class="form-check-input" type="checkbox" value="" id="fakeNews">
+                          <label class="form-check-label" for="fakeNews">
+                            Fake news
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input name="reasonCheckbox" class="form-check-input" type="checkbox" value="" id="spam">
+                          <label class="form-check-label" for="spam">
+                            Spam, or seems like an advertorial for a product or service
+                          </label>
+                        </div>
+                        <label for="reportComment">Comments, if any:</label>
+                        <textarea id="reportComment" class="form-control" rows="5" style="resize: none;"></textarea>
+                        <br/>
+                        <button id="reportSubmit" class="btn btn-success">Submit</button>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button"  class="btn btn-danger" data-dismiss="modal">Close</button>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    {% load static %}
+    <script src="{% static 'js/article.js' %}" type="text/javascript"></script>
+    <script type="text/javascript">
+        init({{ post.id }}, {{ has_this_user_liked }}, "{{ session_name }}", "{{ session_has_profile_pic }}", "{{ session_profile_pic_name }}", "{{ session_user_slug }}", {{ post.commentsCnt }});
+    </script>
+</body>
+</html>
+{% endblock %}

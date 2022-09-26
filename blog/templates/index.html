@@ -1,0 +1,228 @@
+{% extends "base.html" %}
+{% block title %}{{ "It's Your View" }}{% endblock %}
+{% block content %}
+
+{% load static %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"/>
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>It's Your View</title>
+</head>
+<body>
+    <div class="icon-bar sidebar-social">
+        <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+        <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+        <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+
+    </div>
+    <div class="all-but-footer">
+
+        <div class="row pink-row first-row" >
+            <div class="col-md-2 col-lg-2">
+                <!-- reserved for ads -->
+            </div>
+            <div class="col-md-8 col-lg-8">
+                <div style="margin-top:75px; padding-left: 10px; padding-right:10px;">
+
+                    <br/>
+                    <div class="before-main-heading">
+                        <div class="main-heading">
+                            <h1 style="font-size:500%; font-weight: bold;">SHARE YOUR VIEW!</h1>
+                        </div>
+
+                    </div>
+                    <br/>
+                    <div style="margin-left: 25px; margin-right: 25px;">
+                        <div class="sub-heading">
+                            <h2 class="sub-heading">NOW EVERYONE CAN WRITE AN OPINION-EDITORIAL!</h2>
+                        </div>
+
+                        <p class="home-pg-text">
+                            The Constitution of India guarantees everyone a Right to Freedom of Speech. So exercise it!
+                            We often read op-editorials in newspapers where the authors express their views on current affairs.
+                            Often, the view could be biased - either too left or too right - which you are not comfortable with.
+                            You may have an opinion of your own but not a good space to express it. Your search is over!
+                            It's Your View is exactly the place where you should be. We believe everyone can write, and it need
+                            not be on just the current affairs. Share your knowledge on history, economy, science & technology,
+                            travel, Bollywood - literally on anything in the world so that others can read it and you can become
+                            a great writer!
+                        </p>
+                        <br/>
+                        <div class="sub-heading">
+                            <h2 class="sub-heading">WHY USE It's Your View?</h2>
+                        </div>
+                        <ul class="home-pg-text" style="list-style: none;">
+                            <li><img src="static/img/arrow.png" style="width:25px;"/>&nbsp;&nbsp;Anyone can read and write free of cost</li>
+                            <li><img src="static/img/arrow.png" style="width:25px;"/>&nbsp;&nbsp;No hassles of license for authors</li>
+                            <li><img src="static/img/arrow.png" style="width:25px;"/>&nbsp;&nbsp;One click submission of article - no need to mail and get an approval</li>
+                        </ul>
+                        <br/>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 col-lg-2">
+                <!-- reserved for ads -->
+            </div>
+        </div>
+
+        <div class="row white-row">
+            <div class="col-md-2 col-lg-2">
+                <!-- reserved for ads -->
+            </div>
+            <div class="col-md-8 col-lg-8">
+                <br/>
+                <div class="sub-heading-white" style="margin-left: 25px; margin-right: 25px;">
+                    <h2 class="sub-heading-white">LATEST ON It's Your View:</h2>
+                </div>
+                <br/>
+                    <ul style="list-style: none;">
+                            {% for post in posts %}
+                                <li>
+                                    <div class="article-ref-outer-container">
+                                    <div class="article-ref-first-container">
+                                        <div class="article-ref-second-container">
+                                            <a href="/{{ post.name }}">{{ post.title }}</a>
+                                            <br/>
+                                            <small class="author-name" ><a href="/user/{{ post.author.user_slug }}">{{ post.author.first_name }}</a>&nbsp;{{ post.date_time }}</small>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                    </ul>
+
+
+                <br/>
+                <br/>
+                <button id="write-your-own" class="btn btn-primary btn-lg">Write Your Own!</button>
+
+
+
+
+            </div>
+
+
+
+
+            <div class="col-md-2 col-lg-2">
+                <!-- reserved for ads -->
+            </div>
+        </div>
+        <div class="row pink-row">
+            <div class="col-md-2 col-lg-2">
+                <!-- reserved for ads -->
+            </div>
+
+            <div class="col-md-8 col-lg-8">
+                <div class="sub-heading">
+                    <h2 class="sub-heading" style="text-align:center;">DO'S AND DONT'S</h2>
+                    <br/>
+                    <div class="row dos-donts-container">
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="border-right: 1px dotted gray;">
+                            <div class="sub-heading dos-donts">
+                                <h3 class="dos-donts">Do's</h3>
+                            </div>
+                            <br/>
+                            <ul style="list-style: none; font-size: 85%; font-weight: 100;">
+                                <li><img src="static/img/new_tick.png">Give a detailed opinion.</li>
+                                <li><img src="static/img/new_tick.png">You can give suggestions to a public authority.</li>
+                                <li><img src="static/img/new_tick.png">Share facts from your research, surveys or RTIs.</li>
+                            </ul>
+
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                            <div class="sub-heading dos-donts">
+                                <h3 class="dos-donts">Dont's</h3>
+                            </div>
+                            <br/>
+                            <ul style="list-style: none; font-size: 85%; font-weight: 100;">
+                                <li><img src="static/img/new_cross.png">Hate speech or abusive language</li>
+                                <li><img src="static/img/new_cross.png">Promotion of terrorism</li>
+                                <li><img src="static/img/new_cross.png">Posting fake news</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+                </div>
+
+            </div>
+
+            <div class="col-md-2 col-lg-2">
+                <!-- reserved for ads -->
+            </div>
+        </div>
+        <div class="row white-row last-row">
+            <div class="col-md-2 col-lg-2">
+                <!-- reserved for ads -->
+            </div>
+            <div class="col-md-8 col-lg-8">
+                <div class="sub-heading-white" style="text-align:center;">
+                    <h2 class="sub-heading-white">
+                        MEET OUR TEAM:
+                    </h2>
+                    <br/>
+                </div>
+                <div class="team-container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3" style="border-right: 1px dotted gray; ">
+                            <img src="static/img/vishal.jpg" alt="Vishal Khopkar" style="text-align:center;"/>
+                            <h3>Vishal Khopkar</h3>
+                            <h5>CEO, Editor</h5>
+                            <div class="vishal-social">
+                                <a href="https://twitter.com/vishal1296" target="_blank" class="fa fa-twitter vishal-social-icon"></a>
+                                <a href="https://www.facebook.com/vishalkhopkar1296" target="_blank" class="fa fa-facebook vishal-social-icon"></a>
+                                <a href="https://www.linkedin.com/in/vishal-khopkar-b4b474101/" target="_blank" class="fa fa-linkedin vishal-social-icon"></a>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+                            <div class="vishal-stmt">
+                                <p>
+                                    In today's world where news spreads faster than ever, everyone holds opinions on
+                                    different topics. Some are right-wingers, some are socialists while some detest
+                                    masculine authority. There is a debate and counter-debate on these opinions all the time
+                                    and everywhere - at home, office, college, etc. Everyone doesn't need to support any stencil
+                                    opinion. You will find some people staunchly supporting the issue whereas some support with
+                                    various limitations. These opinions should come out to the world - and Facebook is not the right
+                                    place to write several paragraphs in one post. I used to write blogs for Times of India, but
+                                    at one time they became unresponsive and rejected my article for no reason. That's when I realised
+                                    that India needs a platform where writers can write opinion editorials, as they appear in the
+                                    newspaper, without being at anyone's mercy. Thus, this platform was born.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <br/><br/><br/>
+            </div>
+            <div class="col-md-2 col-lg-2">
+                <!-- reserved for ads -->
+            </div>
+        </div>
+    </div>
+    <!--<div class="row footer">
+        <div class="col-md-2 col-lg-2">
+
+        </div>
+        <div class="col-md-8 col-lg-8">
+            <h5>Contact us: team@itsyourview.in</h5>
+        </div>
+        <div class="col-md-2 col-lg-2">
+
+        </div>
+    </div>-->
+    <!--<br/>
+    <button id="logout-btn">Logout</button>-->
+</body>
+</html>
+{% endblock %}

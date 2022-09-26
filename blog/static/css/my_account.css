@@ -1,0 +1,79 @@
+.all-but-footer{
+    background-color: rgb(182, 5, 133);
+    font-family: "Franklin Gothic Book",sans-serif;
+}
+.peacock-row {
+    //display: table;
+    margin-right: 0px;
+}
+
+@media only all and (max-width: 991px) {
+    .nav-div{
+        display: none;
+    }
+}
+.nav-div{
+    text-align: right;
+    font-size: 120%;
+    border-right: 1px solid gray;
+    height: 100%;
+}
+.account-options{
+
+}
+@media only all and (min-width: 992px){
+    .account-options-mobile{
+        display: none;
+    }
+}
+
+.nav-item:hover{
+    cursor: pointer;
+}
+.pag-nav{
+    left: 50%;
+    position: relative;
+    transform: translate(-50%, -50%);
+}
+#articlesList{
+    min-height: 290px;
+}
+#follUl{
+    min-height: 220px;
+}
+#editProfile, #followers, #following, #changePassword{
+    display: none;
+}
+
+.foll-li{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-top: 1 px solid gray;
+
+}
+textarea{
+    resize:none;
+}
+
+.dropdown{
+    text-align: center;
+    display: inline-block;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.dropdown-menu{
+
+    left:50%;
+    margin-left: -40px;
+
+    padding-left: 0px;
+}
+
+.clickable-link{
+    cursor: pointer;
+}
+.invisible{
+    display: none;
+}
+

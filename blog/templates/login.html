@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}{{ "Login" }}{% endblock %}
+{% block content %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"/>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+
+</head>
+<body>
+    <form id="login-form" name="login-form" style="margin-top:50px;">
+        <!--{% csrf_token %}-->
+         <div class="form-group label-static is-empty">
+            <label for="username_lgn" class="control-label">Username</label>
+            <input id="username_lgn" class="form-control" type="text" placeholder="Enter the username"/>
+        </div>
+        <br/>
+        <div class="form-group label-static is-empty">
+            <label for="password_lgn" class="control-label">Password</label>
+            <input id="password_lgn" class="form-control" type="password" placeholder="Enter the password"/>
+        </div>
+        <button type="submit" class="btn btn-info waves-effect ripple">Login</button>
+    </form>
+</body>
+</html>
+{% endblock %}

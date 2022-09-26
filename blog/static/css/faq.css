@@ -1,0 +1,38 @@
+all-but-footer{
+    font-family: "Franklin Gothic Book",sans-serif;
+}
+.faq-row{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.button-array{
+    margin-left: 25px;
+    margin-right: 25px;
+
+
+}
+.faq-button:hover{
+    background-color: black;
+    color: white;
+}
+.faq-button:focus{
+    border: 1px solid gray;
+    color: white;
+}
+.faq-button{
+    width: 100%;
+    font-size: 100%;
+    background-color: rgb(182, 5, 133);
+    border: 1px solid gray;
+    color:white;
+    text-align: left;
+    margin-bottom: 5px;
+}
+.faq-answer{
+    padding-left: 5px;
+    padding-right: 5px;
+    border: 1px solid black;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+}

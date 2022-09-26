@@ -1,0 +1,88 @@
+.all-but-footer{
+    background-color: rgb(182, 5, 133);
+    font-family: "Franklin Gothic Book",sans-serif;
+}
+.main-content{
+    margin-top: 80px;
+    margin-bottom: 20px;
+    background-color: white;
+    border: 1px solid black;
+    padding-left: 30px;
+    padding-right: 30px;
+
+}
+.article-heading{
+    font-size: 350%;
+    font-weight: bold;
+}
+.author-name-date{
+    text-align:right;
+}
+.fa-whatsapp{
+    background-color: rgb(27, 215, 65);
+    color: white;
+}
+
+.content{
+    text-align: justify;
+    text-justify: inter-word;
+    font-size: 150%;
+}
+
+.like-link{
+    color: white;
+    background-color: green;
+    border-radius: 50%;
+}
+.dislike-link{
+    color: white;
+    background-color: red;
+    border-radius: 50%;
+}
+
+.like-dislike-btn{
+    padding: 0px;
+    border-radius: 50%;
+    outline: none;
+}
+.like-dislike-btn:focus {
+    border: none !important;
+    outline: none !important;
+
+}
+.comment-text{
+    margin-left: 30px;
+}
+.blue-like-dislike, .blue-like-dislike:focus{
+    color: blue;
+}
+
+#likesModal{
+    height: 500px;
+}
+.article-action-btn{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.reference-list{
+    font-size: 100%;
+    margin-left: -25px;
+}
+.tag-link{
+    text-decoration: none;
+    background-color: rgb(182, 5, 133);
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5%;
+    color: white;
+}
+.tag-link:focus, .tag-link:active, .tag-link:hover, .tag-link:visited{
+    text-decoration: none;
+    color: white;
+}
+.tag-link:hover{
+    opacity: 80%;
+}

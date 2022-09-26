@@ -1,0 +1,283 @@
+html, body{
+
+    overflow-x: hidden;
+}
+.all-but-footer{
+    min-height: calc(100vh - 40px);
+}
+.navbar-button-cust{
+    width: 80px;
+}
+.icon-bar {
+  position: fixed;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+@media only screen and (max-width: 992px){
+    .icon-bar{
+        display:none;
+    }
+}
+@media only all and (max-width: 768 px){
+    .navbar-button-cust {
+        width: 70px !important;
+    }
+}
+
+/* Style the icon bar links */
+.icon-bar a {
+  display: block;
+  text-align: center;
+  padding: 9px;
+  transition: all 0.3s ease;
+  color: white;
+  font-size: 20px;
+}
+.icon-bar a:hover {
+  background-color: #000;
+}
+
+.read-write-login-button {
+    display: none;
+}
+.read-write-login-button-link{
+    color: white;
+    margin-top:15px;
+    margin-bottom:15px;
+    font-size: 170%;
+    font-family:"Franklin Gothic Book",sans-serif;
+
+}
+
+.read-write-login-button-link>a{
+    color: white;
+}
+.read-write-login-button-link>a:hover{
+
+    text-decoration: none;
+}
+#read-link:hover{
+    color: rgb(253, 153, 2);
+}
+#write-link:hover{
+    color: rgb(51, 204, 255);
+}
+#account-link:hover{
+    color:rgb(89, 244, 62);
+}
+#login-link:hover{
+    color:rgb(89, 244, 62);
+}
+#contactus-link:hover{
+    color: rgb(255, 128, 255);
+}
+#faq-link:hover{
+    color: rgb(255, 201, 14);
+}
+@media only all and (max-width: 767px) {
+  .read-write-login-button {
+    display: block;
+  }
+}
+@media only all and (max-width: 768 px){
+    #collapsibleNavbar {
+        display: none !important;
+
+    }
+    .navbar-collapse{
+        display: none !important;
+    }
+}
+
+
+ol{
+    font-size: 4px;
+}
+
+.navbar-btn-container{
+    margin-left:10px;
+    margin-right:10px;
+}
+.myContainer{
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}
+.pink-row{
+    background-color:rgb(182, 5, 133);
+
+}
+.main-heading{
+    text-align:center;
+    font-family:"Franklin Gothic Book",sans-serif;
+    color: White;
+    -webkit-text-stroke-width: 1.5px;
+    -webkit-text-stroke-color: black;
+}
+.sub-heading{
+    font-family:"Gadugi",sans-serif;
+    font-weight: bold;
+    font-size: 145%;
+    color: white;
+}
+.sub-heading-white{
+    font-family:"Gadugi",sans-serif;
+    font-weight: bold;
+    font-size: 145%;
+    color: black;
+}
+.home-pg-text{
+    font-size: 150%;
+    font-family:"Franklin Gothic Book",sans-serif;
+    color: white;
+}
+.white-home-page-text{
+    color:black;
+}
+.white-row{
+    color:black;
+}
+p{
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.article-list>li{
+    border-left: 3px solid pink;
+}
+.article-ref-first-container{
+    border-left: 10px solid rgb(182, 5, 133);
+    //border-image : url(img/border.png) 30;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height : 90px;
+}
+
+.article-ref-second-container{
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    position: relative;
+    top:50%;
+    font-size: 150%;
+    font-family:"Franklin Gothic Book",sans-serif;
+    -ms-transform: translate(-50%, -50%);
+    transform: translateY(-50%);
+}
+
+#write-your-own{
+    left:50%;
+    margin: 0;
+  position: relative;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+
+}
+.dos-donts{
+    text-align: center;
+}
+
+.dos-donts-container{
+    font-family:"Franklin Gothic Book",sans-serif;
+}
+.team-container{
+    text-align: center;
+    font-family:"Franklin Gothic Book",sans-serif;
+}
+.fa {
+  padding: 10px;
+  font-size: 20px;
+  width: 40px;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* Add a hover effect if you want */
+.fa:hover, {
+  opacity: 0.7;
+  text-decoration: none !important;
+}
+
+.fa:active, .fa:visited{
+    text-decoration: none !important;
+}
+
+/* Set a specific color for each brand */
+
+/* Facebook */
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+/* Twitter */
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+}
+/* LinkedIn */
+.fa-linkedin {
+  background: rgb(0, 172, 179);
+  color: white;
+}
+
+.fa-envelope-o{
+    background: rgb(182, 5, 133);
+    color: white;
+}
+/*
+@media only screen and (min-height: 1000px){
+    .last-row{
+        height: 100%;
+    }
+}
+*/
+.vishal-stmt{
+    margin-top: 0px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: 125%;
+}
+.semicolon{
+    font-size: 300%;
+}
+.footer{
+    background-color: #222;
+    color: white;
+    font-family:"Franklin Gothic Book",sans-serif;
+    text-align: center;
+
+    postion: relative;
+    bottom: 0%;
+    margin-bottom: 0px;
+}
+
+.footer-social{
+    padding-left: 0px;
+    padding-right: 0px;
+    width: 75%;
+}
+
+.red-label{
+    color: red;
+}
+
+.green-label{
+    color: green;
+}
+.vishal-social-icon, vishal-social-icon:hover, vishal-social-icon:active, vishal-social-icon:visited{
+    text-decoration: none !important;
+}
+.author-name{
+    font-size: 14px !important;
+}
+
+.author-name > a{
+     color: rgb(210, 68, 0);
+}

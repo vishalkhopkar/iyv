@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+{% block title %}{{ "FAQ - It's Your View" }}{% endblock %}
+{% block content %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"/>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/faq.css' %}"/>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FAQ - It's Your View</title>
+</head>
+<body>
+    <div class="container all-but-footer" style="margin-left: 0px; margin-right: 0px; width: 100%; padding: 0px;">
+        <div class="row pink-row first-row" style="margin-left: 0px; margin-right: 0px;">
+            <div class="col-md-2 col-lg-2">
+                <!-- reserved for ads -->
+            </div>
+            <div class="col-md-8 col-lg-8">
+                <div style="margin-top: 75px;">
+                    <br/>
+                    <div class="main-heading">
+                        <h1 style="font-size:500%; font-weight: bold;">FAQ</h1>
+                    </div>
+                    <br/>
+                </div>
+
+
+            </div>
+            <div class="col-md-2 col-lg-2">
+                <!-- reserved for ads -->
+            </div>
+        </div>
+        <div class="row white-row last-row faq-row">
+            <div class="col-md-2 col-lg-2">
+                <!-- reserved for ads -->
+            </div>
+            <div class="col-md-8 col-lg-8">
+                <div class="button-array">
+
+                        <button type="button" class="btn faq-button" data-toggle="collapse" data-target="#ans1">
+                        What is an op-ed?
+                        </button>
+                        <div id="ans1" class="collapse faq-answer">
+                            <p>
+                                An op-ed (opposite the editorial or opinion-editorial) is a section that appears usually in the middle of a newspaper.
+                                It is widely read by many avid newspaper readers. It contains the views and opinions of journalists or experts.
+                                Their opinion is backed by facts and figures. They are of a special interest to students preparing for
+                                government competitive exams like the UPSC and state PSCs civil services examinations. The topics on which
+                                they are usually written pertain to current affairs, but can also be written to remember history on specific days.
+                                For more information, please refer to <a href="https://en.wikipedia.org/wiki/Op-ed" target="_blank" title="Op-ed - Wikipedia">Op-ed - Wikipedia</a>.
+                                A sample editorial from The Indian Express is pasted below:
+                                <br/>
+                                <img src="static/img/sample_editorial.JPG" alt="Sample editorial from The Indian Express" width="100%"/>
+                            </p>
+                        </div>
+                        <button type="button" class="btn faq-button" data-toggle="collapse" data-target="#ans2">
+                        What is "It's Your View"?
+                        </button>
+                        <div id="ans2" class="collapse faq-answer">
+                            <p>
+                                It's Your View is a website for anyone to write op-eds. An op-ed published in a newspaper could
+                                have a certain political bias and we are a platform for letting anyone publish it, provided they
+                                follow our terms and conditions. Although editorials in newspapers are usually on current affairs
+                                only, users are free to publish on a wide variety of topics, as long as they are in public interest.
+                                You can find the latest editorials on the website by clicking the "Read" button in the navigation bar above.
+                                If you are using a smaller device, you may open the drop down menu by clicking the right button there.
+                            </p>
+                        </div>
+
+                        <button type="button" class="btn faq-button" data-toggle="collapse" data-target="#ans3">
+                        How can I publish an editorial on "It's Your View"?
+                        </button>
+                        <div id="ans3" class="collapse faq-answer">
+                            <p>
+                                Create an account here, and click on the "Write" button above, or select the "Write" link
+                                from the drop down by clicking the rightmost button with three lines (for smaller screen devices).
+                                You need to give a mandatory title and the main content. There is an optional section for
+                                references. We will detect the most important words from your article as tags, and you can add
+                                more if needed.
+
+                            </p>
+                        </div>
+
+                        <button type="button" class="btn faq-button" data-toggle="collapse" data-target="#ans4">
+                        Why can't I upload images in my editorials?
+                        </button>
+                        <div id="ans4" class="collapse faq-answer">
+                            <p>
+                                Uploading images from third party websites is not allowed for now. However, you can copy paste
+                                images from other sources into your content area.
+
+                            </p>
+                        </div>
+
+                        <button type="button" class="btn faq-button" data-toggle="collapse" data-target="#ans5">
+                        Will my editorial be reviewed?
+                        </button>
+                        <div id="ans5" class="collapse faq-answer">
+                            <p>
+                                Yes, your editorial will be reviewed once and checked for plagiarism and any content that
+                                violates our policies. If it is found to be so, it will be taken down and you will be notified
+                                by email.
+
+                            </p>
+                        </div>
+
+                        <button type="button" class="btn faq-button" data-toggle="collapse" data-target="#ans6">
+                        What will happen if I violate the policy?
+                        </button>
+                        <div id="ans6" class="collapse faq-answer">
+                            <p>
+                                If your editorial has minor flaws, you will be asked to rectify them by email.
+                                If it is evident that you have intentionally violated our policies, you will face a three
+                                month ban.
+
+                            </p>
+                        </div>
+
+                        <button type="button" class="btn faq-button" data-toggle="collapse" data-target="#ans7">
+                        Can I paste my editorial from my own writing elsewhere?
+                        </button>
+                        <div id="ans7" class="collapse faq-answer">
+                            <p>
+                                Yes, you can post your own editorials from other sources. However, you
+                                cannot post anything written by others for it will be regarded as
+                                plagiarism.
+
+                            </p>
+                        </div>
+
+                        <button type="button" class="btn faq-button" data-toggle="collapse" data-target="#ans8">
+                            Why do I see editorials by the editor? Isn't that a conflict of interest?
+                        </button>
+                        <div id="ans8" class="collapse faq-answer">
+                            <p>
+                                Articles by the editor are samples to encourage others to write. They are marked with
+                                a special category of "By Editor" to distinguish them. The editor also follows all
+                                policies strictly and you can pinpoint any violations in the comments or through mail.
+
+                            </p>
+                        </div>
+
+
+                </div>
+            </div>
+            <div class="col-md-2 col-lg-2">
+                <!-- reserved for ads -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}

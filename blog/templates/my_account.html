@@ -1,0 +1,341 @@
+{% extends "base.html" %}
+{% block title %}{{ web_title }}{% endblock %}
+{% block content %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"/>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/my_account.css' %}"/>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/croppie.css' %}"/>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+</head>
+<body>
+    <div class="container all-but-footer" style="margin-left: 0px; margin-right: 0px; width: 100%; padding: 0px;">
+        <div class="white-row first-row row" style="">
+            <div class="col-md-1 col-lg-1 pink-col">
+
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+                <div style="margin-left: 10px; margin-right: 10px; margin-top: 80px; border: 1px solid black;  padding-bottom: 20px; padding-top: 20px; background-color: white;">
+                    <div class="about-info row" style="margin: 0px; padding-bottom: 30px;">
+
+                            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="padding-top: 20px;">
+                                <div style="text-align: center;">
+                                    {% if has_dp %}
+                                    <img id="profilePic" class="profile-pic" src="../static/img/user/{{ user_slug }}/{{ user_dp }}" width="100" height="100" alt="{{ session_name }}"/>
+                                    {% else %}
+                                    <img class="profile-pic" src="../static/img/badge.png" width="100" height="100" alt="{{ session_name }}"/>
+                                    {% endif %}
+                                    <br/>
+                                    <small id="userSlugDisplay" style="display: none;">{{ user_slug }}</small>
+                                        {% if session_user_slug %}
+                                             {% if session_user_slug == user_slug %}
+                                                <a href="#editPhotoModal" data-toggle="modal" data-target="#editPhotoModal" style="text-align: center;">Edit photo</a>
+                                             {% endif %}
+                                        {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" style="padding-left: 20px;">
+                                <h2>{{ session_name }}</h2>
+                                {% if session_user_slug %}
+                                {% if user_slug != session_user_slug %}
+                                {% if this_person_follows_you %}
+                                <h5 style="color: rgb(182, 5, 133);">Follows you</h5>
+                                {% endif %}
+                                {% endif %}
+                                {% endif %}
+                                <p>
+                                    {% if about %}
+                                        {% for about_line in about %}
+                                            {{ about_line }}
+                                                <br/>
+                                            {% endfor %}
+                                    {% endif %}
+                                </p>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                                        <div class="user-profile-social">
+                                            {% if twitter_url %}
+                                            <a href="{{ twitter_url }}" target="_blank" class="fa fa-twitter vishal-social-icon"></a>
+                                            {% endif %}
+                                            {% if facebook_url %}
+                                            <a href="{{ facebook_url }}" target="_blank" class="fa fa-facebook vishal-social-icon"></a>
+                                            {% endif %}
+                                            {% if linkedin_url %}
+                                            <a href="{{ linkedin_url }}" target="_blank" class="fa fa-linkedin vishal-social-icon"></a>
+                                            {% endif %}
+                                        </div>
+                                        <br/>
+                                    </div>
+                                    <div class="col-md-2 col-lg-2">
+
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-5" style="padding-top: 5px;">
+                                        <div class="foll">
+                                            <button id="aboutFollowers" class="btn btn-default">Followers <span id="followerCntBadge" class="badge">{{ follower_cnt }}</span></button>
+                                            <button id="aboutFollowing" class="btn btn-default">Following <span id="followingCntBadge" class="badge">{{ following_cnt }}</span></button>
+                                            <small id="whomToFollow" style="display:none;">{{ user_id }}</small>
+                                            {% if session_user_slug %}
+                                            {% ifnotequal user_slug session_user_slug %}
+
+
+                                            {% if does_logged_in_user_follow %}
+                                            <button id="followBtn" class="btn btn-danger">Unfollow</button>
+
+                                            {% else %}
+                                            <button id="followBtn" class="btn btn-success">Follow</button>
+                                            {% endif %}
+                                            {% endifnotequal %}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+
+                    </div>
+                    <div class="row peacock-row" style="margin: 0px; padding-bottom: 20px;">
+                        <div class="col-xs-0 col-sm-0 col-md-3 col-lg-3 nav-div peacock-col" style="padding-top: 20px;">
+                            <ul class="nav nav-pills nav-stacked account-options">
+                              <li class="nav-item active" id="articlesLi">
+                                <a class="nav-link" id="articlesLink">Articles</a>
+                              </li>
+                                <li class="nav-item" id="followersLi">
+                                    <a class="nav-link" id="followersLink" >Followers</a>
+                                </li>
+                                <li class="nav-item" id="followingLi">
+                                    <a class="nav-link" id="followingLink" >Following</a>
+                                </li>
+                                {% if session_user_slug %}
+                                {% ifequal user_slug session_user_slug %}
+                                  <li class="nav-item " id="editProfileLi">
+                                    <a class="nav-link" id="editProfileLink" >Edit Profile</a>
+                                  </li>
+                                  <li class="nav-item" id="changePasswordLi">
+                                    <a class="nav-link" id="changePasswordLink" >Change Password</a>
+                                  </li>
+                                  <li class="nav-item">
+                                    <a class="nav-link" href=#logoutModal" data-toggle="modal" data-target="#logoutModal"><span style="font-size: 80%" class="glyphicon glyphicon-off"></span> Logout</a>
+                                  </li>
+                                {% endifequal %}
+                                {% endif %}
+                            </ul>
+                            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 peacock-col">
+                            <ul class="nav nav-pills account-options-mobile">
+                              <li class="nav-item active" id="articlesLiMobile">
+                                <a class="nav-link" id="articlesLinkMobile">Articles</a>
+                              </li>
+                                <li class="nav-item" id="followersLiMobile">
+                                    <a class="nav-link" id="followersLinkMobile" >Followers</a>
+                                </li>
+                                <li class="nav-item" id="followingLiMobile">
+                                    <a class="nav-link" id="followingLinkMobile" >Following</a>
+                                </li>
+                                {% if session_user_slug %}
+                                {% ifequal user_slug session_user_slug %}
+                                  <li class="nav-item " id="editProfileLiMobile">
+                                    <a class="nav-link" id="editProfileLinkMobile" >Edit Profile</a>
+                                  </li>
+                                  <li class="nav-item" id="changePasswordLiMobile">
+                                    <a class="nav-link" id="changePasswordLinkMobile" >Change Password</a>
+                                  </li>
+                                  <li class="nav-item">
+                                    <a class="nav-link" href=#logoutModal" data-toggle="modal" data-target="#logoutModal"><span style="font-size: 80%" class="glyphicon glyphicon-off"></span> Logout</a>
+                                  </li>
+                                {% endifequal %}
+                                {% endif %}
+                            </ul>
+                            <div id="articles">
+                                <h2>{{ articles_cnt }} ARTICLES</h2>
+                                <br/>
+                                <ul id="articlesList" style="list-style: none; padding: 0px;">
+                                        {% for article in articles %}
+                                        <li>
+                                            <div class="article-ref-outer-container">
+                                            <div class="article-ref-first-container">
+                                                <div class="article-ref-second-container" style="font-size: 120%;">
+                                                    <a href="/{{ article.name }}">{{ article.title }}</a>
+                                                    <br/><small>{{ article.date_time }}</small>
+
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </li>
+                                        {% endfor %}
+
+
+                                </ul>
+                                <br/>
+                                <br/>
+                                {% if articles_cnt > 5 %}
+                                <center>
+                                    <a id="articlesPrev" class="clickable-link">Previous</a>
+                                    <div class="page-dropdown dropdown">
+                                      <button id="currentPage" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Page 1&nbsp;<span class="caret"></span></button>
+                                      <ul id="articlesPaginationUl" class="dropdown-menu">
+                                        <li><a class="clickable-link" onclick="articlesPaginationClick(1)" id="articlesPage1">Page 1</a></li>
+
+                                      </ul>
+                                    </div>
+                                    <a id="articlesNext" class="clickable-link">Next</a>
+                                </center>
+                                {% endif %}
+
+
+                            </div>
+                            <div id="followers">
+                                <h2 id="followingOrFollower">454 FOLLOWERS</h2>
+                                <br/>
+                                <ul id="follUl" style="list-style: none; padding: 0px;">
+                                    <!--li class="foll-li">
+                                        <div class="row">
+                                            <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2">
+                                                <img src="{% static 'img/vishal.jpg' %}" width="60" height="60"/>
+                                            </div>
+                                            <div class="col-xs-8 col-sm-10 col-md-10 col-lg-10">
+                                                <h5>Vishal Khopkar</h5>
+                                                <small>45 followers</small>
+                                            </div>
+
+                                        </div>
+
+                                    </li-->
+                                </ul>
+                                <br/>
+                                <div id="follPagination" style="display: none;">
+                                    <center>
+                                        <a id="follPrev" class="clickable-link">Previous</a>
+                                        <div class="page-dropdown dropdown">
+                                          <button id="currentFollPage" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Page 1&nbsp;<span class="caret"></span></button>
+                                          <ul id="follPaginationUl" class="dropdown-menu">
+
+
+                                          </ul>
+                                        </div>
+                                        <a id="follNext" class="clickable-link">Next</a>
+                                    </center>
+                                </div>
+                            </div>
+
+                            <div id="editProfile">
+                                <form id="editProfileForm">
+                                    <label for="about">About</label>
+                                    <textarea id="about" class="form-control" rows="5">{% if about %}{{ full_about }}{% endif %}</textarea>
+                                    <br/>
+                                    <label for="facebookProfileUrl">Facebook Profile URL</label>
+                                    <input type="text" class="form-control" placeholder="For example: https://www.facebook.com/itsyourview" pattern="https://.*" id="facebookProfileUrl" {% if facebook_url %}value="{{ facebook_url }}"{% endif %}/>
+                                    <br/>
+                                    <label for="twitterProfileUrl">Twitter Profile URL</label>
+                                    <input type="text" class="form-control" placeholder="For example: https://twitter.com/vishal1296" pattern="https://.*" id="twitterProfileUrl" {% if twitter_url %}value="{{ twitter }}"{% endif %}/>
+                                    <br/>
+                                    <label for="linkedinProfileUrl">LinkedIn Profile URL</label>
+                                    <input type="text" class="form-control" placeholder="For example: https://www.linkedin.com/in/maitri-vasa/" pattern="https://.*" id="linkedinProfileUrl" {% if linkedin_url %}value="{{ linkedin_url }}"{% endif %}/>
+                                    <br/>
+                                    <button type="submit" id="editProfileSubmit" class="btn btn-success">Submit</button>
+                                </form>
+                            </div>
+                            <div id="changePassword">
+                                <form id="changePasswordForm">
+                                    <label for="currentPassword">Current Password</label>
+                                    <input type="password" id="currentPassword" class="form-control"/>
+                                    <br/>
+
+                                    <label for="newPassword">New Password</label>
+                                    <input type="password" id="newPassword" class="form-control"/>
+                                    <br/>
+                                    <div class="password-constraints row">
+                                        <div class="password-constraints-inner col-xs-6 col-sm-6 col-md-6 col-lg-6" style="border-right: 1px dotted gray; text-align: left;">
+                                            <h5 id="changeSixMoreH" class="red-label"><span id="changeSixMoreSpan" class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;6 or more valid characters (A-Z, a-z, 0-9, !, @, #, $, %, &)</h5>
+                                            <h5 id="changeNumeralH" class="red-label"><span id="changeNumeralSpan" class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;At least 1 numeral</h5>
+                                        </div>
+                                        <div class="password-constraints-inner col-xs-6 col-sm-6 col-md-6 col-lg-6" style="text-align: left;">
+                                            <h5 id="changeSpCharH" class="red-label"><span id="changeSpCharSpan" class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;At least 1 special character</h5>
+                                            <h5 id="changeMatchH" class="red-label"><span id="changeMatchSpan" class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Passwords should match</h5>
+                                        </div>
+                                    </div>
+                                    <label for="confirmNewPassword">Confirm New Password</label>
+                                    <input type="password" id="confirmNewPassword" class="form-control"/>
+                                    <br/>
+                                    <button type="submit" disabled id="changePwdSubmit" class="btn btn-success">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1 col-lg-1 pink-col">
+
+            </div>
+        </div>
+    </div>
+
+    <!-- logout modal -->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+          <div class="modal-body">
+            <h5>Do you really wish to logout?</h5>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="logoutConfirm" class="btn btn-success">Yes</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="editPhotoModal" tabindex="-1" role="dialog" aria-labelledby="editPhotoModal" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+          <div class="modal-body">
+              <label for="chooseFile">Choose a file:</label>
+              <br/>
+              <div class="input-group ">
+
+                   <input type="file" id="chooseFile" style="width:100%;" class="form-control ref-value"/>
+
+              </div>
+              <br/>
+                <div id="cropper">
+
+                </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button"  class="btn btn-danger" data-dismiss="modal">Cancel</button>
+              <button type="button" id="editPhotoOk" class="btn btn-success">OK</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    {% load static %}
+    <script src="{% static 'js/croppie.min.js' %}" type="text/javascript"></script>
+    {% load static %}
+    <script src="{% static 'js/my_account.js' %}" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        passVariables({{ follower_cnt }}, {{ following_cnt }}, {{ articles_cnt }}, {{ session_user_id }}, {{ user_id }}, "{{ user_slug }}");
+
+
+    </script>
+
+
+</body>
+</html>
+{% endblock %}

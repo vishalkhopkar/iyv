@@ -1,0 +1,50 @@
+.url-col{
+
+}
+.save-submit-jodi{
+    right: 0%;
+    position: relative;
+    float: right;
+
+}
+.save-submit-button{
+    margin-left: 5px;
+
+}
+.help-link, .help-link:hover, .help-link:visited, .help-link:active{
+    text-decoration:none;
+}
+.write-div{
+    margin-top:10px !important;
+    margin-bottom:10px !important;
+}
+.reference-input{
+    margin-top:2px;
+    margin-bottom: 5px;
+
+}
+
+ol li:before{
+    display: inline-block;
+}
+.add-ref-btn{
+    right: 0%;
+    position: relative;
+    float: right;
+    background-color: rgb(182, 5, 133);
+    color: white;
+}
+.add-ref-btn:hover{
+
+    color: white;
+    opacity: 0.75;
+}
+.add-ref-btn:focus{
+    color: white;
+}
+.tags-input{
+    width:100%;
+}
+.bootstrap-tagsinput{
+    width: 100% !important;
+}
